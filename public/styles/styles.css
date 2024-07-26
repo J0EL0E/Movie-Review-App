@@ -1,0 +1,470 @@
+:root{
+    --main-color: #000000;
+    --secondary-color: #FFFFFF;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    font-family: "Poppins", sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 1000px;
+    margin: 0 auto;
+}
+
+main > div {
+    margin: 20px;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    background-color: var(--secondary-color);
+}
+
+nav > ul {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+}
+
+nav li{
+    list-style: none;
+    margin: 0 10px;
+    padding: 10px;
+}
+
+nav a:hover {
+    background-color: var(--main-color);
+    color: var(--secondary-color);
+    transition: background-color .5s, color .5s, ease-out 1s;
+}
+
+nav a{
+    text-decoration: none;
+    color: var(--main-color);
+    padding: 10px; 
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+
+}
+
+.show-modal-btn {
+    width: 100px;
+    padding: 10px 5px;
+    border-radius: 10px;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.movie-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-container > .movie > img {
+    width:200px;
+    height: 350px;
+    object-fit: cover;
+    margin-right: 0px;
+}
+
+.movie-container > .movie {
+    display: flex;
+    margin: 10px 0 10px 0;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.movie:hover {
+    transition: background-color .5s, color .5s, ease-out 2s;
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+}
+
+.movie:hover > .caption-container > .btn-dropdown {
+    color: var(--main-color);
+}
+
+.movie:hover > .caption-container > .btn-dropdown:hover {
+    color: var(--secondary-color);
+}
+
+.movie:hover > .caption-container > .btn-container > button {
+    color: var(--secondary-color);
+    background-color: var(--main-color)
+}
+
+.movie:hover .review > form  span{
+    color: var(--main-color);
+  
+}
+
+.movie:hover .review > form  input{
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+
+
+.caption-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+    width: 80%;
+}
+
+
+
+.btn-dropdown {   
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    color: var(--secondary-color);
+    background-color: transparent;
+    align-self: flex-end;
+}
+
+.btn-dropdown:active {
+    color: var(--main-color);
+    background-color: var(--secondary-color);
+}
+
+.btn-dropdown:hover {
+    color: var(--secondary-color);
+    background-color: var(--main-color);
+}
+
+.dropdown-container{
+    background-color: var(--main-color);
+    border: 1px solid var(--secondary-color);
+    width: 200px;
+    position: relative;
+    display: none;
+    align-self: flex-end;
+    z-index: 1;
+    margin-right: 20px;
+    top: -20px;
+}
+
+.dropdown-container > ul {
+    padding-left: 0;
+    width: 150px;
+}
+
+.dropdown-container li {
+    list-style-type: none;
+}
+
+.dropdown-container a  {
+    color: var(--secondary-color);
+    font-family: "Poppins", sans-serif;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.dropdown-container a:hover  {
+    color: var(--main-color);
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.see-reviews-btn {
+    width: 100px;
+    padding: 10px 5px;
+    border-radius: 10px;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hide-reviews-btn {
+    display: none;
+    padding: 10px 5px;
+    border-radius: 10px;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.review-container {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.review-container > h3 {
+    margin: 10px 0;
+}
+
+.review-container > .review {
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+}
+
+.review > form {
+    align-self: center;
+    margin: 10px;
+    width: 100%;
+}
+
+.review > form > .done-review-btn, .edit-review-btn, .delete-review-btn {
+    border: none;
+    background-color: transparent;
+    color: var(--secondary-color);
+    margin: 10px 0 5px 5px;
+
+}
+.review > form  span {
+    font-size: 1.7rem;
+}
+
+.review > p {
+    margin-left: 20px;
+    margin-right: 5px;
+    width: 70%;
+}
+
+.updated-review {
+    margin: 0 5px 10px 20px;
+    background-color: transparent;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    padding: 5px;
+    width: 70%;
+    font-family: "Poppins", sans-serif;
+}
+
+
+
+.add-review-btn {
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    width: 100px;
+    padding: 10px 5px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+
+}
+
+.review-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    display: none;
+
+}
+
+.review-form > .review-content {
+    width: 100%;
+    height: 20vh;
+    margin: 10px auto;
+    background-color: transparent;
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+    border-radius: 10px;
+}
+
+.review-form > .post-btn {
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    padding: 10px 5px;
+    width: 100px;
+    border-radius: 10px;
+    border: none;
+    margin: 10px 0;
+    cursor: pointer;
+
+}
+.movie:hover > .caption-container > .review-form >  textarea{
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+
+.movie:hover > .caption-container > .review-form > .post-btn{
+    border: 1px solid var(--main-color);
+    color: var(--main-color);
+}
+
+.review-form > .cancel-btn {
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    padding: 10px 5px;
+    width: 100px;
+    border-radius: 10px;
+    border: none;
+    margin: 10px 0;
+    background-color: red;
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.review-form  .ratings {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+
+.modal-container {
+    width: 550px;
+    height: 500px;
+    display: none;
+    z-index: 1;
+    margin: 5% 0 5% 10%;
+    position: fixed;
+    border: 1px solid var(--secondary-color);
+    background-color: var(--main-color);
+    border-radius: 10px;
+}
+
+.modal-header{
+    width: 80%;
+    padding: 10px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.close-btn  {
+    font-size: 3rem;
+    font-weight: bold;
+    align-self: center;
+    margin-left: 42%;
+    cursor: pointer;
+
+}
+.close-btn:hover {
+    cursor: pointer;
+}
+.modal-container > .modal-content {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+}
+
+.modal-content > div {
+    display: flex;
+    flex-direction: row;
+}
+.modal-content > div > label{
+    margin-left: 10px;
+}
+
+.modal-content > * {
+    margin: 10px 0;
+}
+
+.modal-content > #search-bar {
+    background-color: transparent;
+    border: 1px solid var(--secondary-color);
+    width: 100%;
+    padding: 10px;
+    color: var(--secondary-color);
+    border-radius: 10px;
+}
+
+.modal-content > .form-search-btn {
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    width: 125px;
+    padding: 10px 5px;
+    border-radius: 10px;
+    border: none;
+    align-self: center;
+    cursor: pointer;
+}
+
+.form-search-btn:hover {
+    color: var(--secondary-color);
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color .5s, color .5s, ease-out 2s;
+}
+
+.container{
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.container > img{
+    width: 200px;
+    height: 200px;
+    border-radius: 50% ;
+    align-self: center;
+}
+
+.container > .caption{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.container h2{
+    font-size: 1.7rem;
+}
+
+.container > .caption > h2, h3{
+    margin: 5px 0;
+}
+
+.back-btn {
+    padding: 10px 5px;
+    border-radius: 10px;
+    border: none;
+    font-family: "Poppins", sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: "Poppins", sans-serif;
+    color: var(--main-color);
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.help-section{
+    width: 1000px;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.help-section h1 {
+    font-size: 2rem;
+}
+
+.about-title {
+    font-size: 2rem;
+    margin-left: 20px;
+}
+
+.not-found-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+}

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie and Shows Review Site</title>
+    <link
+      rel="shortcut icon"
+      type="x-icon"
+      href="/images/icons8-movie-ticket-50.png"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Dosis&family=Honk&family=Inter:wght@100..900&family=Lato&family=Love+Ya+Like+A+Sister&family=Nanum+Gothic&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Press+Start+2P&family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="styles/styles.css" />
+  </head>
+  <body>
+    <main>
+      <%- include('partials/navbar.ejs') %>
+      <div class="message-container">
+        <h1>Movies and Shows Review Site</h1>
+        <p>
+          Introducing "Movies and Shows Review", your ultimate destination for
+          all things entertainment! Dive into the world of movies and TV shows
+          with our comprehensive reviews and ratings. Whether you're a cinephile
+          searching for the next big blockbuster or a binge-watcher looking for
+          your next obsession, we've got you covered. Explore expert critiques,
+          user-generated feedback, and curated recommendations to discover your
+          next favorite watch. Join our community of passionate enthusiasts and
+          embark on a journey through the best of cinema and television. Welcome
+          to Movies and Shows Review – where every opinion counts!
+        </p>
+        <button class="show-modal-btn">Add a show</button>
+      </div>
+      <div class="movie-container">
+        <div><h2>Movies and Shows List</h2></div>
+
+        <% if (locals.movies) { %> <%# movies.forEach(movie => { %> <%for(let i
+        = 0; i < movies.length; i++){ %>
+
+        <div class="movie">
+          <input type="hidden" name="movie_id" value="<%= movies[i].id %>" />
+          <img src="<%=movies[i].cover_photo_url%>" alt="show-poster-img" />
+          <div class="caption-container">
+            <button class="btn-dropdown">
+              <span class="material-symbols-outlined"> more_vert </span>
+            </button>
+            <div class="dropdown-container">
+              <ul>
+                <li><a href="/delete/<%=movies[i].id%>">Delete</a></li>
+              </ul>
+            </div>
+            <h2><%= movies[i].title %></h2>
+            <p><%= movies[i].overview %></p>
+            <!--Review Modal-->
+            <div class="review-container">
+              <% if (locals.reviews) { %>
+              <h3>Movie Review</h3>
+              <% for (let j = 0; j < reviews.length; j++){ %> <%if(movies[i].id
+              === reviews[j].movie_id){ %>
+              <div class="review">
+                <p class="review-content"><%= reviews[j].review_content%></p>
+                <form action="/edit-review/<%=reviews[j].id%>" method="post">
+                  <input type="hidden" name="<%=reviews[j].id%>" />
+                  <input
+                    type="text"
+                    name="updated_review"
+                    value="<%= reviews[j].review_content%>"
+                    class="updated-review"
+                    hidden="true"
+                  />
+                  <button class="done-review-btn" hidden="true">
+                    <span class="material-symbols-outlined"> done </span>
+                  </button>
+                  <button class="edit-review-btn" type="button">
+                    <span class="material-symbols-outlined"> edit </span>
+                  </button>
+
+                  <a
+                    href="/delete-review/<%=reviews[j].id%>"
+                    class="delete-review-btn"
+                  >
+                    <span class="material-symbols-outlined"> delete </span>
+                  </a>
+                </form>
+              </div>
+              <%}%> <%}%> <% } %>
+            </div>
+            <form action="/add-review" method="post" class="review-form">
+              <input
+                type="hidden"
+                name="movie_id"
+                value="<%= movies[i].id %>"
+              />
+              <label for="review-content">Write your reactions here</label>
+              <textarea
+                name="review_content"
+                id="review-content"
+                class="review-content"
+                placeholder="Enter your reactions here."
+              ></textarea>
+              <label for="ratings">Ratings</label>
+              <div>
+                <button class="ratings" type="button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="#e8eaed"
+                    class="stars"
+                  >
+                    <path
+                      d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"
+                    />
+                  </svg>
+                </button>
+
+                <button class="ratings" type="button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="#e8eaed"
+                    class="stars"
+                  >
+                    <path
+                      d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"
+                    />
+                  </svg>
+                </button>
+                <button class="ratings" type="button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="#e8eaed"
+                    class="stars"
+                  >
+                    <path
+                      d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"
+                    />
+                  </svg></button
+                ><button class="ratings" type="button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="#e8eaed"
+                    class="stars"
+                  >
+                    <path
+                      d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"
+                    />
+                  </svg></button
+                ><button class="ratings" type="button">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="#e8eaed"
+                    class="stars"
+                  >
+                    <path
+                      d="m354-287 126-76 126 77-33-144 111-96-146-13-58-136-58 135-146 13 111 97-33 143ZM233-120l65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Zm247-350Z"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <button class="post-btn" type="submit">Post Review</button>
+              <button class="cancel-btn" type="button">Cancel</button>
+            </form>
+            <div class="btn-container">
+              <button type="button" class="hide-reviews-btn">
+                Hide Reviews
+              </button>
+              <button type="button" class="see-reviews-btn">See Reviews</button>
+              <button class="add-review-btn">Add review</button>
+            </div>
+          </div>
+        </div>
+        <%#}); %> <% } %> <% } else { %>
+        <div class="movie">
+          <img src="" alt="show-poster-img" />
+          <div class="caption-container">
+            <h2>Show title</h2>
+            <p>Show synopsis</p>
+          </div>
+        </div>
+        <% } %>
+      </div>
+      <!--Search Modal-->
+      <div class="modal-container">
+        <div class="modal-header">
+          <h2>Search for movies or shows</h2>
+          <span class="close-btn">&times;</span>
+        </div>
+        <form action="/new" method="post" class="modal-content">
+          <label for="search-bar"
+            >Search for movies or tv shows you want to review.</label
+          >
+          <div>
+            <input
+              type="checkbox"
+              name="checkbox"
+              class="checkbox"
+              value="movie"
+            />
+            <label for="#movie-checkbox">Movie</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="checkbox"
+              class="checkbox"
+              value="tv"
+            />
+            <label for="#tv-checkbox"> TV</label>
+          </div>
+
+          <input
+            type="search"
+            name="search-keyword"
+            placeholder="Search a show to review"
+            id="search-bar"
+            required
+          />
+          <button type="submit" class="form-search-btn">Search</button>
+        </form>
+      </div>
+    </main>
+    <script>
+      const showModal = document.querySelector(".show-modal-btn");
+      const closeBtn = document.querySelector(".close-btn");
+      const modalContainer = document.querySelector(".modal-container");
+      const addReviewBtn = document.querySelectorAll(".add-review-btn");
+      const reviewForm = document.querySelectorAll(".review-form");
+      const cancelBtn = document.querySelectorAll(".cancel-btn");
+      const dropdownBtn = document.querySelectorAll(".btn-dropdown");
+      const dropdownContainer = document.querySelectorAll(
+        ".dropdown-container"
+      );
+      const formSearchBtn = document.querySelectorAll(".form-search-btn");
+      const searchBar = document.querySelectorAll("#search-bar");
+      const editReviewBtn = document.querySelectorAll(".edit-review-btn");
+      const reviewContent = document.querySelectorAll(".review-content");
+      const updateReviewContent = document.querySelectorAll(".updated-review");
+      const doneReviewBtn = document.querySelectorAll(".done-review-btn");
+      const deleteReviewBtn = document.querySelectorAll(".delete-review-btn");
+      const seeMoreBtn = document.querySelectorAll(".see-reviews-btn");
+      const hideReviewBtn = document.querySelectorAll(".hide-reviews-btn");
+      const reviewContainer = document.querySelectorAll(".review-container");
+      const ratings = document.querySelectorAll(".ratings");
+      const stars = document.querySelectorAll(".stars");
+
+      for (let i = 0; i < stars.length; i++) {
+        ratings[i].addEventListener("click", () => {
+          console.log("clicked");
+          stars[i].style.fill = "yellow";
+          console.log(stars[i].hasAttribute("fill"));
+        });
+      }
+
+      for (let i = 0; i < seeMoreBtn.length; i++) {
+        seeMoreBtn[i].addEventListener("click", () => {
+          reviewContainer[i].style.display = "flex";
+          seeMoreBtn[i].style.display = "none";
+          hideReviewBtn[i].style.display = "initial";
+        });
+      }
+      for (let i = 0; i < hideReviewBtn.length; i++) {
+        hideReviewBtn[i].addEventListener("click", () => {
+          reviewContainer[i].style.display = "none";
+          seeMoreBtn[i].style.display = "initial";
+          hideReviewBtn[i].style.display = "none";
+        });
+      }
+
+      for (let i = 0; i < editReviewBtn.length; i++) {
+        editReviewBtn[i].addEventListener("click", () => {
+          reviewContent[i].setAttribute("hidden", true);
+          deleteReviewBtn[i].setAttribute("hidden", true);
+          updateReviewContent[i].removeAttribute("hidden");
+          doneReviewBtn[i].removeAttribute("hidden");
+          editReviewBtn[i].setAttribute("hidden", true);
+        });
+      }
+
+      /*Delete Movie*/
+      for (let i = 0; i < dropdownBtn.length; i++) {
+        dropdownBtn[i].addEventListener("click", () => {
+          dropdownContainer[i].style.display = "block";
+        });
+
+        window.addEventListener("click", (event) => {
+          if (event.target === dropdownContainer[i]) {
+            dropdownContainer[i].style.display = "none";
+          }
+        });
+      }
+
+      /*Review Modal*/
+      for (let i = 0; i < addReviewBtn.length; i++) {
+        addReviewBtn[i].addEventListener("click", () => {
+          reviewForm[i].style.display = "block";
+          addReviewBtn[i].style.display = "none";
+        });
+      }
+      for (let i = 0; i < addReviewBtn.length; i++) {
+        cancelBtn[i].addEventListener("click", () => {
+          reviewForm[i].style.display = "none";
+          addReviewBtn[i].style.display = "block";
+        });
+      }
+
+      /*Search Modal*/
+      showModal.addEventListener("click", () => {
+        modalContainer.style.display = "block";
+      });
+
+      document
+        .querySelectorAll('input[type="checkbox"]')
+        .forEach(function (checkbox) {
+          checkbox.addEventListener("change", function () {
+            document
+              .querySelectorAll('input[type="checkbox"]')
+              .forEach(function (siblingCheckbox) {
+                if (siblingCheckbox !== checkbox) {
+                  siblingCheckbox.checked = false;
+                }
+              });
+          });
+        });
+
+      closeBtn.addEventListener("click", () => {
+        modalContainer.style.display = "none";
+      });
+
+      window.addEventListener("click", (event) => {
+        if (event.target === modalContainer) {
+          modalContainer.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
