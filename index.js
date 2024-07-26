@@ -6,13 +6,14 @@ import { config } from 'dotenv';
 
 const db = new pg.Client({
     user: 'postgres',
-    host: 'localhost',
-    database: 'Movie Review',
+    host: process.env.POSTGRES_HOST,
+    database: process.env.POSTGRES_DATABASE,
     password: '123@pASSWORD',
-    port: 5432
+    port: process.env.POSTGRES_PORT
 });
 
 db.connect();
+config();
 
 const app = express();
 const port = 3000;
@@ -56,7 +57,7 @@ app.post('/new', async(req, res) => {
         const searchKey = req.body["search-keyword"];
         const checkboxValue = req.body.checkbox;
         const params = {
-            api_key: '72bc1ee348c9659ccdb6bed2927eed66',
+            api_key: process.env.API_KEY,
             query: searchKey
         }; 
         const checkItem = await db.query('SELECT * FROM movie WHERE title = $1', [searchKey]);
